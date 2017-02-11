@@ -4,9 +4,12 @@ window.App = {
     start: function() {
         var self = this;
 
+        //we just use account 1 as participant
         getAccounts(1, function () {
             refreshBalance();
         }, this);
+
+        setParticipantName(1);
     },
 
     setStatus: function(message) {

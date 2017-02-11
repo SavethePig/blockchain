@@ -49,14 +49,19 @@ function injectTargets (type) {
     }
 }
 
+function setParticipantName (me) {
+    var h = document.getElementById('participant');
+    h.innerHTML = targets[me]['name'];
+}
+
 function injectProducts () {
-    var select = document.getElementById('amount');
+    var select = document.getElementById('products');
 
     for (var i = 0; i < products.length; i++ ) {
 
             var opt = document.createElement('option');
             opt.value = products[i]['price'];
-            opt.innerHTML = products[i]['name'];
+            opt.innerHTML = products[i]['name'] + ' (' + products[i]['price'] + ' EURO )';
             select.appendChild(opt);
     }
 }
