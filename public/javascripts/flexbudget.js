@@ -15,7 +15,7 @@ window.App = {
   },
 
   deposit: function() {
-    var self,
+    var self = this,
         amount = parseInt(document.getElementById("amount").value),
         receiver = document.getElementById("receiver").value;
 
