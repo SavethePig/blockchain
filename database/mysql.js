@@ -16,10 +16,9 @@ module.exports = class MySql {
 
     doQuery (query, callback) {
         // this.connection.connect();
-
         this.connection.query(query, callback);
 
-        // this.connection.end();
+         // this.connection.end();
     }
 
 };

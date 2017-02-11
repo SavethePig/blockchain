@@ -18,8 +18,6 @@ function retrieveContracts (res) {
           services[results[i].name] = contract;
       }
 
-      debugger;
-
       res.render('index', { title: 'Express' });
 
     });

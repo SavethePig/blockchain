@@ -10,8 +10,27 @@ let web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545")),
     contractLocation‌ = path.join(__dirname, 'FlexBudget.sol'),
     contractData = fs.readFileSync(contractLocation‌, 'utf8').replace(/\n/g, '');
 
+let names = ['Edward', 'Marcel', 'Terence', 'Martijn', 'Aye', 'Kirill'];
+
+var database = new db();
+
+for (let i = 0; i < acc.length; i++) {
+
+    let contracttype = 0;
+
+    if (i > 0) {
+        contracttype = i > 2 ? 2 : 3;
+    }
+
+    database.doQuery('insert into targets (name, address, contracttype) values ("' + names[i] + '","' + acc[i] + '",' + contracttype + ')',
+        function () {
+        }
+    );
+}
+
+
 //web3.personal.unlockAccount(acc[0], "g3heimpje");
-function createContract (address, abi, code, name) {
+function createContract (address, abi, code, name, type) {
 
     let contractClass = web3.eth.contract(abi);
 
@@ -21,8 +40,7 @@ function createContract (address, abi, code, name) {
             if(!contract.address) {
                 console.log("Contract transaction send: TransactionHash: " + contract.transactionHash + " waiting to be mined...");
             } else {
-
-                new db().doQuery('insert into contracts (address, abi, code, `from`, name) values ("' + contract.address + '",\'' + JSON.stringify(abi) + '\',"' + code + '", "' + acc[0] + '","' + name + '")',
+                database.doQuery('insert into contracts (address, abi, code, `from`, name, type) values ("' + contract.address + '",\'' + JSON.stringify(abi) + '\',"' + code + '", "' + acc[0] + '","' + name + '",' + type + ')',
                     function (error, results, fields) {
                         console.log("Contract mined and address store in db");
                     });
@@ -35,13 +53,13 @@ let compiled = solc.compile(contractData, 1);
 let abi = JSON.parse(compiled.contracts[':FlexBudgetContract'].interface);
 let code = compiled.contracts[':FlexBudgetContract'].bytecode;
 
-createContract(acc[0], abi, code, 'FlexBudgetContract');
+createContract(acc[0], abi, code, 'FlexBudgetContract', 1);
 
 compiled = solc.compile(contractData, 1);
 abi = JSON.parse(compiled.contracts[':PurchaseContract'].interface);
 code = compiled.contracts[':PurchaseContract'].bytecode;
 
-createContract(acc[1], abi, code, 'PurchaseContract');
+createContract(acc[1], abi, code, 'PurchaseContract', 2);
 
 
 
