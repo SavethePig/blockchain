@@ -9,17 +9,18 @@ let db = new (require('../database/mysql.js'))();
 
 function retrieveContracts (res) {
 
-    let web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+      let web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
-    var contracts = db.doQuery('select * from contracts', function (error, results, fields) {
+      let contracts = db.doQuery('select * from contracts', function (error, results, fields) {
 
-      var msg = [];
+      var services = {};
 
       for (let i = 0; i < results.length; i++) {
-          let greeter = web3.eth.contract(JSON.parse(results[i]['abi'])).at(results[i]['address']);
-
-          msg.push(greeter.greet());
+          let contract = web3.eth.contract(JSON.parse(results[i]['abi'])).at(results[i]['address']);
+          services[results[i].name] = contract;
       }
+
+      debugger;
 
       res.render('index', { title: 'Express' });
 

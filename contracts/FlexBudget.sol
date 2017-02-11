@@ -2,7 +2,7 @@ pragma solidity ^0.4.8;
 
 contract FlexBudgetContract {
 
-    address owner; // Pensioenfonds
+    address owner;
 
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
 
@@ -11,8 +11,6 @@ contract FlexBudgetContract {
     }
 
     function deposit(address deelnemer, uint amount) {
-      // Pre / postcondities
-
       Transfer(owner, deelnemer, amount);
     }
 
@@ -20,7 +18,7 @@ contract FlexBudgetContract {
 
 contract PurchaseContract {
 
-    address owner; // Deelnemer
+    address owner;
 
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
 
@@ -29,11 +27,6 @@ contract PurchaseContract {
     }
 
     function buyProduct(address supplier, uint price) {
-          // Pre / postcondities
-          // product
-
           Transfer(owner, supplier, price);
     }
-
-
 }
