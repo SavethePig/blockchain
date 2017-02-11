@@ -30,4 +30,5 @@ window.App = {
 
 window.addEventListener('load', function() {
   App.start();
+  injectTargets(1);
 });

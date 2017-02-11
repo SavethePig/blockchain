@@ -19,7 +19,7 @@ for (let i = 0; i < acc.length; i++) {
     let contracttype = 0;
 
     if (i > 0) {
-        contracttype = i > 2 ? 2 : 3;
+        contracttype = i > 3 ? 2 : 1;
     }
 
     database.doQuery('insert into targets (name, address, contracttype) values ("' + names[i] + '","' + acc[i] + '",' + contracttype + ')',

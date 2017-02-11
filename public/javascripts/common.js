@@ -34,3 +34,29 @@ function refreshBalance() {
         balance_element.innerHTML = value ? value.valueOf() : 0;
     });
 }
+
+function injectTargets (type) {
+    var select = document.getElementById('receiver');
+
+    for (var i = 0; i < targets.length; i++ ) {
+
+        if (targets[i].contracttype == type) {
+            var opt = document.createElement('option');
+            opt.value = targets[i]['address'];
+            opt.innerHTML = targets[i]['name'];
+            select.appendChild(opt);
+        }
+    }
+}
+
+function injectProducts () {
+    var select = document.getElementById('amount');
+
+    for (var i = 0; i < products.length; i++ ) {
+
+            var opt = document.createElement('option');
+            opt.value = products[i]['price'];
+            opt.innerHTML = products[i]['name'];
+            select.appendChild(opt);
+    }
+}

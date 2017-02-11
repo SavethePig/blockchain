@@ -5,6 +5,7 @@
   <link href='stylesheets/app.css' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
   <script src="../contracts"></script>
+  <script src="../targets"></script>
   <script src="./javascripts/web3.js"></script>
   <script src="./javascripts/common.js"></script>
   <script src="./javascripts/flexbudget.js"></script>
@@ -17,7 +18,7 @@
   <br>
   <h1>Deposit funds</h1>
   <br><label for="amount">Bedrag:</label><input type="text" id="amount" placeholder="e.g., 95"></input>
-  <br><label for="receiver">Deelnemer adres:</label><input type="text" id="receiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
+  <br><label for="receiver">Deelnemer</label><select id="receiver"></select>
   <br><br><button id="send" onclick="App.deposit()">Verstuur</button>
   <br><br>
   <span id="status"></span>
