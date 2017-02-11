@@ -1,21 +1,26 @@
 var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
-var services = {};
+var services = {},
+    contractName = 'FlexBudgetContract',
+    FlexBudgetContract;
+
+
 for (var i = 0; i < contractLocations.length; i++) {
-    var contract = web3.eth.contract(JSON.parse(contractLocations[i]['abi'])).at(contractLocations[i]['address']);
-    services[contractLocations[i].name] = contract;
+
+  if (contractLocations[i]['name'] === contractName) {
+      FlexBudgetContract = web3.eth.contract(JSON.parse(contractLocations[i]['abi'])).at(contractLocations[i]['address']);
+      break;
+  }
 }
 
 
 // MetaCoin is our usable abstraction, which we'll use through the code below.
-var FlexBudgetContract = services['FlexBudgetContract'];
-var PurchaseContract = services['PurchaseContract'];
 
 // The following code is simple to show off interacting with your contracts.
 // As your needs grow you will likely need to change its form and structure.
 // For application bootstrapping, check out window.addEventListener below.
-var accounts;
-var account;
+var accounts,
+    account;
 
 window.App = {
   start: function() {
@@ -54,10 +59,6 @@ window.App = {
       var balance_element = document.getElementById("balance");
       balance_element.innerHTML = value ? value.valueOf() : 0;
     });
-    //     .catch(function(e) {
-    //   console.log(e);
-    //   self.setStatus("Error getting balance; see log.");
-    // });
   },
 
   deposit: function() {
@@ -74,10 +75,6 @@ window.App = {
         self.setStatus("Transaction complete!");
         self.refreshBalance();
     });
-  //       .catch(function(e) {
-  //   console.log(e);
-  //   self.setStatus("Error sending coin; see log.");
-  // });
   }
 };
 
