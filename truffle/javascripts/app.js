@@ -52,8 +52,8 @@ window.App = {
 
     return meta.getBalance.call(account, {from: account}, function(value) {
       var balance_element = document.getElementById("balance");
-      balance_element.innerHTML = value.valueOf();
-    })
+      balance_element.innerHTML = value ? value.valueOf() : 0;
+    });
     //     .catch(function(e) {
     //   console.log(e);
     //   self.setStatus("Error getting balance; see log.");
