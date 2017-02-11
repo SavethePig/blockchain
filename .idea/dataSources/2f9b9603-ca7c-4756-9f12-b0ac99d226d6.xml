@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="blockchain@5.157.83.37">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="blockchain">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <table id="4" parent="2" name="contracts"/>
+    <column id="5" parent="4" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="6" parent="4" name="address">
+      <Position>2</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="7" parent="4" name="abi">
+      <Position>3</Position>
+      <DataType>mediumtext|0</DataType>
+    </column>
+    <column id="8" parent="4" name="code">
+      <Position>4</Position>
+      <DataType>mediumtext|0</DataType>
+    </column>
+    <column id="9" parent="4" name="from">
+      <Position>5</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <key id="10" parent="4" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>

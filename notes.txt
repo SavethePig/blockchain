@@ -1,0 +1,7 @@
+open geth consoles 
+
+make ciminer
+make cinode1
+make cnode2
+
+Change networkid in the dockerfile now 42
