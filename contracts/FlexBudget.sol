@@ -14,6 +14,10 @@ contract FlexBudgetContract {
       Transfer(owner, deelnemer, amount);
     }
 
+    function getBalance() constant returns (uint) {
+      return this.balance;
+    }
+
 }
 
 contract PurchaseContract {
@@ -28,5 +32,9 @@ contract PurchaseContract {
 
     function buyProduct(address supplier, uint price) {
           Transfer(owner, supplier, price);
+    }
+
+    function getBalance() constant returns (uint) {
+          return this.balance;
     }
 }
