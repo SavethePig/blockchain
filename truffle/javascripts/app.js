@@ -1,17 +1,14 @@
-// Import the page's CSS. Webpack will know what to do with it.
-import "../stylesheets/app.css";
 
-// Import libraries we need.
-import { default as Web3} from 'web3';
-import { default as contract } from 'truffle-contract'
+var services = {};
+for (var i = 0; i < contractLocations.length; i++) {
+    var contract = web3.eth.contract(JSON.parse(contractLocations[i]['abi'])).at(contractLocations[i]['address']);
+    services[contractLocations[i].name] = contract;
+}
 
-// Import our contract artifacts and turn them into usable abstractions.
-import flexbudget_artifacts from '../../build/contracts/FlexBudgetContract.json'
-import purchase_artifacts from '../../build/contracts/PurchaseContract.json'
 
 // MetaCoin is our usable abstraction, which we'll use through the code below.
-var FlexBudgetContract = contract(flexbudget_artifacts);
-var PurchaseContract = contract(purchase_artifacts);
+var FlexBudgetContract = services['FlexBudgetContract'];
+var PurchaseContract = services['PurchaseContract'];
 
 // The following code is simple to show off interacting with your contracts.
 // As your needs grow you will likely need to change its form and structure.
@@ -22,9 +19,6 @@ var account;
 window.App = {
   start: function() {
     var self = this;
-
-    // Bootstrap the FlexBudget abstraction for Use.
-    FlexBudgetContract.setProvider(web3.currentProvider);
 
     // Get the initial account balance so it can be displayed.
     web3.eth.getAccounts(function(err, accs) {
@@ -53,11 +47,9 @@ window.App = {
   refreshBalance: function() {
     var self = this;
 
-    var meta;
-    FlexBudgetContract.deployed().then(function(instance) {
-      meta = instance;
-      return meta.getBalance.call(account, {from: account});
-    }).then(function(value) {
+    var meta = FlexBudgetContract;
+
+    return meta.getBalance.call(account, {from: account}).then(function(value) {
       var balance_element = document.getElementById("balance");
       balance_element.innerHTML = value.valueOf();
     }).catch(function(e) {
@@ -74,17 +66,16 @@ window.App = {
 
     this.setStatus("Initiating transaction... (please wait)");
 
-    var meta;
-    FlexBudgetContract.deployed().then(function(instance) {
-      meta = instance;
-      return meta.deposit(receiver, amount, {from: account});
-    }).then(function() {
-      self.setStatus("Transaction complete!");
-      self.refreshBalance();
-    }).catch(function(e) {
-      console.log(e);
-      self.setStatus("Error sending coin; see log.");
-    });
+    var meta = FlexBudgetContract;
+
+    return meta.deposit(receiver, amount, {from: account})
+        .then(function() {
+    self.setStatus("Transaction complete!");
+    self.refreshBalance();
+  }).catch(function(e) {
+    console.log(e);
+    self.setStatus("Error sending coin; see log.");
+  });
   }
 };
 

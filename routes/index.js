@@ -9,8 +9,6 @@ let db = new (require('../database/mysql.js'))();
 
 function retrieveContracts (res) {
 
-      let web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-
       let contracts = db.doQuery('select * from contracts', function (error, results, fields) {
 
       var services = {};
