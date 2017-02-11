@@ -50,13 +50,14 @@ window.App = {
 
     var meta = FlexBudgetContract;
 
-    return meta.getBalance.call(account, {from: account}).then(function(value) {
+    return meta.getBalance.call(account, {from: account}, function(value) {
       var balance_element = document.getElementById("balance");
       balance_element.innerHTML = value.valueOf();
-    }).catch(function(e) {
-      console.log(e);
-      self.setStatus("Error getting balance; see log.");
-    });
+    })
+    //     .catch(function(e) {
+    //   console.log(e);
+    //   self.setStatus("Error getting balance; see log.");
+    // });
   },
 
   deposit: function() {
@@ -69,14 +70,14 @@ window.App = {
 
     var meta = FlexBudgetContract;
 
-    return meta.deposit(receiver, amount, {from: account})
-        .then(function() {
-    self.setStatus("Transaction complete!");
-    self.refreshBalance();
-  }).catch(function(e) {
-    console.log(e);
-    self.setStatus("Error sending coin; see log.");
-  });
+    return meta.deposit(receiver, amount, {from: account}, function () {
+        self.setStatus("Transaction complete!");
+        self.refreshBalance();
+    });
+  //       .catch(function(e) {
+  //   console.log(e);
+  //   self.setStatus("Error sending coin; see log.");
+  // });
   }
 };
 
