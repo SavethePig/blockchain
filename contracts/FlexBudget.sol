@@ -13,12 +13,16 @@ contract FlexBudgetContract {
     }
 
     function deposit(address deelnemer, uint amount) {
+      if (balances[owner] < amount) throw;
+
       Transfer(owner, deelnemer, amount);
       balances[owner] -= amount;
       balances[deelnemer] += amount;
     }
 
     function buyProduct(address deelnemer, address supplier, uint price) {
+       if (balances[deelnemer] < price) throw;
+
        Transfer(deelnemer, supplier, price);
        balances[deelnemer] -= price;
        balances[supplier] += price;
