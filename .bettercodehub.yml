@@ -1,0 +1,5 @@
+exclude:
+- /public/javascripts/web3.js
+component_depth: 1
+languages:
+- javascript
