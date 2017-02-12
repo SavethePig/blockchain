@@ -3,43 +3,33 @@ pragma solidity ^0.4.8;
 contract FlexBudgetContract {
 
     address owner;
-    uint balance;
+    mapping (address => uint) public balances;
 
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
 
     function FlexBudgetContract() {
         owner = msg.sender;
-        balance = 10000;
+        balances[tx.origin] = 10000;
     }
 
     function deposit(address deelnemer, uint amount) {
       Transfer(owner, deelnemer, amount);
-      balance -= amount;
-    }
-
-    function getBalance() constant returns (uint) {
-      return balance;
-    }
-
-}
-
-contract PurchaseContract {
-
-    address owner;
-    uint balance;
-
-    event Transfer(address indexed _from, address indexed _to, uint256 _value);
-
-    function PurchaseContract() {
-        owner = msg.sender;
+      balances[owner] -= amount;
+      balances[deelnemer] += amount;
     }
 
     function buyProduct(address supplier, uint price) {
-          Transfer(owner, supplier, price);
-          balance -= price;
+       Transfer(owner, supplier, price);
+       balances[owner] -= price;
+       balances[supplier] += price;
     }
 
     function getBalance() constant returns (uint) {
-          return balance;
+      return balances[owner];
     }
+
+    function getBalanceDeelnemer(address deelnemer) constant returns (uint) {
+      return balances[deelnemer];
+    }
+
 }
