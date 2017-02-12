@@ -14,19 +14,19 @@ let names = ['Edward', 'Marcel', 'Terence', 'Martijn', 'Aye', 'Kirill'];
 
 var database = new db();
 
-for (let i = 0; i < acc.length; i++) {
-
-    let contracttype = 0;
-
-    if (i > 0) {
-        contracttype = i > 3 ? 2 : 1;
-    }
-
-    database.doQuery('insert into targets (name, address, contracttype) values ("' + names[i] + '","' + acc[i] + '",' + contracttype + ')',
-        function () {
-        }
-    );
-}
+// for (let i = 0; i < acc.length; i++) {
+//
+//     let contracttype = 0;
+//
+//     if (i > 0) {
+//         contracttype = i > 3 ? 2 : 1;
+//     }
+//
+//     database.doQuery('insert into targets (name, address, contracttype) values ("' + names[i] + '","' + acc[i] + '",' + contracttype + ')',
+//         function () {
+//         }
+//     );
+// }
 
 
 //web3.personal.unlockAccount(acc[0], "g3heimpje");

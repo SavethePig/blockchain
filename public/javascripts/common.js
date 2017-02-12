@@ -29,9 +29,9 @@ function getAccounts (me, callback, scope) {
 }
 
 function refreshBalance() {
-    return contract.getBalance.call(account, {from: account}, function(value) {
+    return contract.getBalance(function(som, value) {
         var balance_element = document.getElementById("balance");
-        balance_element.innerHTML = value ? value.valueOf() : 0;
+        balance_element.innerHTML = value ? value.c[0] : 0;
     });
 }
 
