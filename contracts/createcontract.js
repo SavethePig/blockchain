@@ -55,11 +55,11 @@ let code = compiled.contracts[':FlexBudgetContract'].bytecode;
 
 createContract(acc[0], abi, code, 'FlexBudgetContract', 1);
 
-compiled = solc.compile(contractData, 1);
-abi = JSON.parse(compiled.contracts[':PurchaseContract'].interface);
-code = compiled.contracts[':PurchaseContract'].bytecode;
-
-createContract(acc[1], abi, code, 'PurchaseContract', 2);
+// compiled = solc.compile(contractData, 1);
+// abi = JSON.parse(compiled.contracts[':PurchaseContract'].interface);
+// code = compiled.contracts[':PurchaseContract'].bytecode;
+//
+// createContract(acc[1], abi, code, 'PurchaseContract', 2);
 
 
 

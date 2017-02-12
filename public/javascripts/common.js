@@ -35,6 +35,13 @@ function refreshBalance() {
     });
 }
 
+function refreshBalanceDeelnemer() {
+    return contract.getBalanceDeelnemer(account, function(som, value) {
+        var balance_element = document.getElementById("balance");
+        balance_element.innerHTML = value ? value.c[0] : 0;
+    });
+}
+
 function injectTargets (type) {
     var select = document.getElementById('receiver');
 

@@ -1,4 +1,4 @@
-var contract = contracts['PurchaseContract'];
+var contract = contracts['FlexBudgetContract'];
 
 window.App = {
     start: function() {
@@ -6,7 +6,7 @@ window.App = {
 
         //we just use account 1 as participant
         getAccounts(1, function () {
-            refreshBalance();
+            refreshBalanceDeelnemer();
         }, this);
 
         setParticipantName(1);
@@ -17,16 +17,16 @@ window.App = {
         status.innerHTML = message;
     },
 
-    deposit: function() {
+    buy: function() {
         var self = this,
-            amount = parseInt(document.getElementById("amount").value),
+            amount = parseInt(document.getElementById("products").value),
             receiver = document.getElementById("receiver").value;
 
         this.setStatus("Initiating transaction... (please wait)");
 
-        return contract.deposit(receiver, amount, {from: account}, function () {
+        return contract.buyProduct(account, receiver, amount, {from: account}, function () {
             self.setStatus("Transaction complete!");
-            refreshBalance();
+            refreshBalanceDeelnemer();
         });
     }
 };
