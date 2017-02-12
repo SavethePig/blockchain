@@ -24,7 +24,7 @@ window.App = {
 
         this.setStatus("Initiating transaction... (please wait)");
 
-        return contract.buyProduct(receiver, amount, function () {
+        return contract.buyProduct(account, receiver, amount, {from: account}, function () {
             self.setStatus("Transaction complete!");
             refreshBalanceDeelnemer();
         });
