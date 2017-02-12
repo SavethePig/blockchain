@@ -9,6 +9,7 @@ contract FlexBudgetContract {
 
     function FlexBudgetContract() {
         owner = msg.sender;
+        balance = 10000;
     }
 
     function deposit(address deelnemer, uint amount) {
