@@ -18,9 +18,9 @@ contract FlexBudgetContract {
       balances[deelnemer] += amount;
     }
 
-    function buyProduct(address supplier, uint price) {
-       Transfer(owner, supplier, price);
-       balances[owner] -= price;
+    function buyProduct(address deelnemer, address supplier, uint price) {
+       Transfer(deelnemer, supplier, price);
+       balances[deelnemer] -= price;
        balances[supplier] += price;
     }
 
